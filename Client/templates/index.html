@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>测温登记系统</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 style="text-align: center">基于二维码的测温登记系统</h1>
+        <form action="/" method="POST">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary" name="status" value="begin">开始</button>
+            </div>
+        </form>
+    </div>
+
+    {% for t in file %}
+        <img src={{ t }} class=".img-thumbnail">
+    {% endfor %}
+
+{% endblock %}

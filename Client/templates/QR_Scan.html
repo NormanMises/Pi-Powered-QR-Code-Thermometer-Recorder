@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <title>请扫码</title>
+</head>
+<script>
+    let timeID = -1
+
+    function getID() {
+        let xmlHttp = new XMLHttpRequest();
+        let baseUrl = "/QR_check";
+        xmlHttp.open("GET", baseUrl, false);
+        console.log()
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
+
+    function changeUrl() {
+        let info = getID();
+        let json = JSON.parse(info);
+        console.log(json)
+        if (json.id !== '-1') {
+            window.location.assign("/temperature_get")
+            clearInterval(timeID)
+            console.log('测温')
+        }
+
+    }
+
+    function addTimer() {
+        timeID = setInterval(changeUrl, 2000);
+        console.log('检测二维码')
+    }
+</script>
+<body onload="addTimer();">
+
+<div class="container">
+    <h1 style="text-align: center">请出示二维码</h1>
+    <h1 style="text-align: center">并靠近测温</h1>
+</div>
+
+</body>
+
+</html>

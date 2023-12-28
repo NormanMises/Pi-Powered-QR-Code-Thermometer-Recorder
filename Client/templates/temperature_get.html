@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>请靠近测温</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1 style="text-align: center">{{ id }} 测温结果</h1>
+        <h2 style="text-align: center">你的体温为：{{ temperature }} C</h2>
+        {% if temperature > 20 %}
+            <h2 style="text-align: center">注意，你的体温过高！！！</h2>
+        {% endif %}
+        <form action="/temperature_get" method="POST">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary" name="reboot" value="true">重新开始</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
